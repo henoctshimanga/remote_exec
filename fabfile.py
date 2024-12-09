@@ -51,4 +51,17 @@ def web_server_setup(WEBURL, DIRNAME):
     local(("wget -O website.zip %s") % WEBURL)
     local("unzip -O website.zip")
 
-    
+    print("####################################################")
+    with lcd(DIRNAME):
+        local("zip -r tooplate.zip * ")
+        put("tooplate.zip", "/var/www/html/", use_sudo=True)
+        
+    with cd("/var/www/html/"):
+        sudo("unzip -o tooplate.zip")
+
+
+    print("####################################################")
+    sudo("systemctl restart httpd")
+
+    print("####################################################")
+    print("Web_server setup is done.")
