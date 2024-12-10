@@ -49,7 +49,7 @@ def web_server_setup(WEBURL, DIRNAME):
     print("Downloading and pushing artifact to webserver.")
     print("####################################################")  
     local(("wget -O website.zip %s") % WEBURL)
-    local("unzip -O website.zip")
+    local("unzip website.zip")
 
     print("####################################################")
     with lcd(DIRNAME):
@@ -57,7 +57,7 @@ def web_server_setup(WEBURL, DIRNAME):
         put("tooplate.zip", "/var/www/html/", use_sudo=True)
         
     with cd("/var/www/html/"):
-        sudo("unzip -o tooplate.zip")
+        sudo("unzip tooplate.zip")
 
 
     print("####################################################")
